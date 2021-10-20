@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:parcial3/BD/controller.dart';
 
 class Cliente extends StatelessWidget {
-  const Cliente({Key? key}) : super(key: key);
-
+  Cliente({Key? key}) : super(key: key);
+  TextEditingController _nomb = TextEditingController();
+  TextEditingController _apell = TextEditingController();
+  TextEditingController _observ = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Cliente'),
       ),
-      body: Column(
+      body: ListView(
         children: [
-          const TextField(
+          TextField(
+            controller: _nomb,
             decoration: InputDecoration(
                 hintText: "Tu Nombre",
                 labelText: "Nombre",
@@ -19,9 +23,10 @@ class Cliente extends StatelessWidget {
             keyboardType: TextInputType.text,
           ),
           const SizedBox(
-            height: 30,
+            height: 10,
           ),
-          const TextField(
+          TextField(
+            controller: _apell,
             decoration: InputDecoration(
                 hintText: "Tu Apellido",
                 labelText: "Apellido",
@@ -29,9 +34,10 @@ class Cliente extends StatelessWidget {
             keyboardType: TextInputType.text,
           ),
           const SizedBox(
-            height: 30,
+            height: 10,
           ),
-          const TextField(
+          TextField(
+            controller: _observ,
             decoration: InputDecoration(
                 labelText: "Observaciones",
                 labelStyle: TextStyle(fontSize: 15, color: Colors.black)),
@@ -40,11 +46,18 @@ class Cliente extends StatelessWidget {
             maxLines: 3,
           ),
           const SizedBox(
-            height: 40,
+            height: 20,
           ),
-          RaisedButton(child: Text("Guardar"),onPressed: () {
-
-          },),
+          RaisedButton(
+            child: Text("Guardar"),
+            onPressed: () {
+              getClientes();
+              setClientes(_nomb.text, _apell.text, _observ.text);
+              /* print(_nomb.text);
+              print(_apell.text);
+              print(_observ.text); */
+            },
+          ),
         ],
       ),
     );
