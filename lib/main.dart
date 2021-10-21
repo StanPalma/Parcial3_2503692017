@@ -1,12 +1,19 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'BD/controller.dart';
+import 'package:parcial3/BD/bdmesas.dart';
+import 'package:parcial3/BD/bdmeseros.dart';
+import 'package:parcial3/BD/controller.dart';
+import 'package:parcial3/Principal/mesas.dart';
+import 'Principal/meseros.dart';
 import 'Principal/principal.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   Firebase.initializeApp().then((value) {
     runApp(const Parcial3());
+    getClientes();
+    getMeseros();
+    getMesas();
   });
 }
 
@@ -36,7 +43,7 @@ class Inicio extends StatelessWidget {
         title: const Text('Inicio'),
       ),
       body: Center(
-          child: Column(
+          child: ListView(
         children: <Widget>[
           const SizedBox(
             height: 50,
@@ -53,21 +60,13 @@ class Inicio extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          btnPlatillo(context),
+          //btnPlatillo(context),
           const SizedBox(
             height: 10,
           ),
-          btnBebida(context),
+          //btnBebida(context),
         ],
-      )
-          /* child: RaisedButton(
-          child: Text('Clientes'),
-          onPressed: () {
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => Mesero()));
-          },
-        ), */
-          ),
+      )),
     );
   }
 }
@@ -80,7 +79,8 @@ Widget btnCliente(contexto) {
       //padding: EdgeInsets.symmetric(horizontal: 75, vertical: 10),
       onPressed: () {
         Navigator.of(contexto)
-            .push(MaterialPageRoute(builder: (context) => Cliente()));
+            .push(MaterialPageRoute(builder: (context) => const ClieOpc()));
+        // getClientes();
       },
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: const Text(
@@ -97,10 +97,10 @@ Widget btnMesero(contexto) {
       //padding: EdgeInsets.symmetric(horizontal: 75, vertical: 10),
       onPressed: () {
         Navigator.of(contexto)
-            .push(MaterialPageRoute(builder: (context) => Mesero()));
+            .push(MaterialPageRoute(builder: (context) => const MeserOpc()));
       },
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      child: Text(
+      child: const Text(
         "Mesero",
         style: TextStyle(fontSize: 20, color: Colors.white),
       ));
@@ -114,14 +114,15 @@ Widget btnMesa(contexto) {
       //padding: EdgeInsets.symmetric(horizontal: 75, vertical: 10),
       onPressed: () {
         Navigator.of(contexto)
-            .push(MaterialPageRoute(builder: (context) => Mesa()));
+            .push(MaterialPageRoute(builder: (context) => const MesaOpc()));
       },
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      child: Text(
+      child: const Text(
         "Mesa",
         style: TextStyle(fontSize: 20, color: Colors.white),
       ));
 }
+/*
 
 Widget btnPlatillo(contexto) {
   return MaterialButton(
@@ -155,7 +156,7 @@ Widget btnBebida(contexto) {
         "Bebida",
         style: TextStyle(fontSize: 20, color: Colors.white),
       ));
-}
+} */
 
 class CRUDApp extends StatefulWidget {
   CRUDApp({Key? key}) : super(key: key);
@@ -168,7 +169,8 @@ class _CRUDAppState extends State<CRUDApp> {
   void initState() {
     super.initState();
     //setClientes('Bladimir', 'Palma', 'Buen cliente');
-    getClientes();
+    //getClientes();
+    //getMeseros();
   }
 
   @override

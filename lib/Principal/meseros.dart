@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:parcial3/BD/controller.dart';
+import 'package:parcial3/BD/bdmeseros.dart';
 
-class ClieOpc extends StatelessWidget {
-  const ClieOpc({Key? key}) : super(key: key);
+class MeserOpc extends StatelessWidget {
+  const MeserOpc({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Clientes'),
+        title: const Text('Meseros'),
       ),
       body: Center(
           child: ListView(
@@ -34,16 +34,16 @@ class ClieOpc extends StatelessWidget {
   }
 }
 
-class ClieInsert extends StatelessWidget {
-  ClieInsert({Key? key}) : super(key: key);
+class MeseInsert extends StatelessWidget {
+  MeseInsert({Key? key}) : super(key: key);
   final TextEditingController _nomb = TextEditingController();
-  final TextEditingController _apell = TextEditingController();
-  final TextEditingController _observ = TextEditingController();
+  final TextEditingController _apell1 = TextEditingController();
+  final TextEditingController _apell2 = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Cliente'),
+        title: const Text('Mesero'),
       ),
       body: ListView(
         children: [
@@ -59,10 +59,9 @@ class ClieInsert extends StatelessWidget {
             height: 10,
           ),
           TextField(
-            controller: _apell,
+            controller: _apell1,
             decoration: const InputDecoration(
-                hintText: "Tu Apellido",
-                labelText: "Apellido",
+                labelText: "Primer apellido",
                 labelStyle: TextStyle(fontSize: 15, color: Colors.black)),
             keyboardType: TextInputType.text,
           ),
@@ -70,13 +69,11 @@ class ClieInsert extends StatelessWidget {
             height: 10,
           ),
           TextField(
-            controller: _observ,
+            controller: _apell2,
             decoration: const InputDecoration(
-                labelText: "Observaciones",
+                labelText: "Segundo apellido",
                 labelStyle: TextStyle(fontSize: 15, color: Colors.black)),
-            keyboardType: TextInputType.multiline,
-            minLines: 2,
-            maxLines: 3,
+            keyboardType: TextInputType.text,
           ),
           const SizedBox(
             height: 20,
@@ -84,8 +81,8 @@ class ClieInsert extends StatelessWidget {
           RaisedButton(
             child: Text("Guardar"),
             onPressed: () {
-              setClientes(_nomb.text, _apell.text, _observ.text);
-              getClientes();
+              setMeseros(_nomb.text, _apell1.text, _apell2.text);
+              getMeseros();
             },
           ),
         ],
@@ -94,25 +91,23 @@ class ClieInsert extends StatelessWidget {
   }
 }
 
-class ClieList extends StatelessWidget {
-  final TextEditingController _idClie = TextEditingController();
-  int tamanio = listC.length;
-
-  ClieList({Key? key}) : super(key: key);
+class MeseList extends StatelessWidget {
+  final TextEditingController _idMese = TextEditingController();
+  int tamanio = listMes.length;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Clientes'),
+        title: const Text('Mesero'),
       ),
       body: ListView(
         //crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           TextField(
-            controller: _idClie,
+            controller: _idMese,
             decoration: const InputDecoration(
-                labelText: "ID Cliente",
+                labelText: "ID Mesero",
                 labelStyle: TextStyle(fontSize: 15, color: Colors.black)),
             keyboardType: TextInputType.text,
           ),
@@ -122,48 +117,50 @@ class ClieList extends StatelessWidget {
           RaisedButton(
             child: const Text("Eliminar"),
             onPressed: () {
-              delClientes(_idClie.text);
-              getClientes();
+              delMeseros(_idMese.text);
+              getMeseros();
             },
           ),
           const SizedBox(
             height: 20,
           ),
-          for (var i = 0; i < listC.length; i++)
+          for (var i = 0; i < listMes.length; i++)
             Card(
               child: ListTile(
                 title: Text(
-                  listC[i],
+                  listMes[i],
                   style: const TextStyle(color: Colors.white),
                 ),
               ),
               color: Colors.green,
             ),
         ],
+        //child: ListTile(
+        //title: Text(listC[1]),
+        //
       ),
     );
   }
 }
 
-class ClieActu extends StatelessWidget {
-  ClieActu({Key? key}) : super(key: key);
-  final TextEditingController _idClie = TextEditingController();
+class MeseActu extends StatelessWidget {
+  MeseActu({Key? key}) : super(key: key);
+  final TextEditingController _idMes = TextEditingController();
   final TextEditingController _nomb = TextEditingController();
-  final TextEditingController _apell = TextEditingController();
-  final TextEditingController _observ = TextEditingController();
+  final TextEditingController _apell1 = TextEditingController();
+  final TextEditingController _apell2 = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Cliente'),
+        title: const Text('Mesero'),
       ),
       body: ListView(
         children: [
           TextField(
-            controller: _idClie,
+            controller: _idMes,
             decoration: const InputDecoration(
-                hintText: "Tu ID",
-                labelText: "ID Clie",
+                hintText: "ID mesero",
                 labelStyle: TextStyle(fontSize: 15, color: Colors.black)),
             keyboardType: TextInputType.text,
           ),
@@ -173,7 +170,6 @@ class ClieActu extends StatelessWidget {
           TextField(
             controller: _nomb,
             decoration: const InputDecoration(
-                hintText: "Tu Nombre",
                 labelText: "Nombre",
                 labelStyle: TextStyle(fontSize: 15, color: Colors.black)),
             keyboardType: TextInputType.text,
@@ -182,10 +178,9 @@ class ClieActu extends StatelessWidget {
             height: 10,
           ),
           TextField(
-            controller: _apell,
+            controller: _apell1,
             decoration: const InputDecoration(
-                hintText: "Tu Apellido",
-                labelText: "Apellido",
+                labelText: "Primer apellido",
                 labelStyle: TextStyle(fontSize: 15, color: Colors.black)),
             keyboardType: TextInputType.text,
           ),
@@ -193,13 +188,11 @@ class ClieActu extends StatelessWidget {
             height: 10,
           ),
           TextField(
-            controller: _observ,
+            controller: _apell2,
             decoration: const InputDecoration(
-                labelText: "Observaciones",
+                labelText: "Segundo apellido",
                 labelStyle: TextStyle(fontSize: 15, color: Colors.black)),
-            keyboardType: TextInputType.multiline,
-            minLines: 2,
-            maxLines: 3,
+            keyboardType: TextInputType.text,
           ),
           const SizedBox(
             height: 20,
@@ -207,18 +200,17 @@ class ClieActu extends StatelessWidget {
           RaisedButton(
             child: Text("Actualizar"),
             onPressed: () {
-              updtClientes(_idClie.text, _nomb.text, _apell.text, _observ.text);
-              getClientes();
+              updtMesero(_idMes.text, _nomb.text, _apell1.text, _apell2.text);
             },
           ),
           const SizedBox(
             height: 20,
           ),
-          for (var i = 0; i < listC.length; i++)
+          for (var i = 0; i < listMes.length; i++)
             Card(
               child: ListTile(
                 title: Text(
-                  listC[i],
+                  listMes[i],
                   style: const TextStyle(color: Colors.white),
                 ),
               ),
@@ -235,10 +227,11 @@ Widget btnInsert(contexto) {
       height: 40.0,
       minWidth: 200.0,
       color: Colors.greenAccent,
+      //padding: EdgeInsets.symmetric(horizontal: 75, vertical: 10),
       onPressed: () {
         Navigator.of(contexto)
-            .push(MaterialPageRoute(builder: (context) => ClieInsert()));
-        //getClientes();
+            .push(MaterialPageRoute(builder: (context) => MeseInsert()));
+        getMeseros();
       },
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: const Text(
@@ -252,10 +245,11 @@ Widget btnListar(contexto) {
       height: 40.0,
       minWidth: 200.0,
       color: Colors.greenAccent,
+      //padding: EdgeInsets.symmetric(horizontal: 75, vertical: 10),
       onPressed: () {
         Navigator.of(contexto)
-            .push(MaterialPageRoute(builder: (context) => ClieList()));
-        //getClientes();
+            .push(MaterialPageRoute(builder: (context) => MeseList()));
+        getMeseros();
       },
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: const Text(
@@ -271,8 +265,8 @@ Widget btnActualizar(contexto) {
       color: Colors.greenAccent,
       onPressed: () {
         Navigator.of(contexto)
-            .push(MaterialPageRoute(builder: (context) => ClieActu()));
-        //getClientes();
+            .push(MaterialPageRoute(builder: (context) => MeseActu()));
+        getMeseros();
       },
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: const Text(
@@ -280,68 +274,3 @@ Widget btnActualizar(contexto) {
         style: TextStyle(fontSize: 20, color: Colors.white),
       ));
 }
-/* 
-class Mesero extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Mesero'),
-      ),
-      body: Center(
-        child: RaisedButton(
-          onPressed: () {},
-        ),
-      ),
-    );
-  }
-}
-
-class Mesa extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Mesa'),
-      ),
-      body: Center(
-        child: RaisedButton(
-          onPressed: () {},
-        ),
-      ),
-    );
-  }
-}
-
-class Platillo extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Platillo'),
-      ),
-      body: Center(
-        child: RaisedButton(
-          onPressed: () {},
-        ),
-      ),
-    );
-  }
-}
-
-class Bebida extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Bebida'),
-      ),
-      body: Center(
-        child: RaisedButton(
-          onPressed: () {},
-        ),
-      ),
-    );
-  }
-}
- */
