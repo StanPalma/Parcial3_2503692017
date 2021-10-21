@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:parcial3/BD/bdmeseros.dart';
+import 'package:parcial3/BD/bdplatillos.dart';
 
-class MeserOpc extends StatelessWidget {
-  const MeserOpc({Key? key}) : super(key: key);
+class PlatOpc extends StatelessWidget {
+  const PlatOpc({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Meseros'),
+        title: const Text('Platillos'),
       ),
       body: Center(
           child: ListView(
@@ -34,21 +34,20 @@ class MeserOpc extends StatelessWidget {
   }
 }
 
-class MeseInsert extends StatelessWidget {
-  MeseInsert({Key? key}) : super(key: key);
-  final TextEditingController _nomb = TextEditingController();
-  final TextEditingController _apell1 = TextEditingController();
-  final TextEditingController _apell2 = TextEditingController();
+class PlatInsert extends StatelessWidget {
+  PlatInsert({Key? key}) : super(key: key);
+  final TextEditingController _nombre = TextEditingController();
+  final TextEditingController _importe = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Mesero'),
+        title: const Text('Platillo'),
       ),
       body: ListView(
         children: [
           TextField(
-            controller: _nomb,
+            controller: _nombre,
             decoration: const InputDecoration(
                 labelText: "Nombre",
                 labelStyle: TextStyle(fontSize: 15, color: Colors.black)),
@@ -58,21 +57,11 @@ class MeseInsert extends StatelessWidget {
             height: 10,
           ),
           TextField(
-            controller: _apell1,
+            controller: _importe,
             decoration: const InputDecoration(
-                labelText: "Primer apellido",
+                labelText: "Importe",
                 labelStyle: TextStyle(fontSize: 15, color: Colors.black)),
-            keyboardType: TextInputType.text,
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          TextField(
-            controller: _apell2,
-            decoration: const InputDecoration(
-                labelText: "Segundo apellido",
-                labelStyle: TextStyle(fontSize: 15, color: Colors.black)),
-            keyboardType: TextInputType.text,
+            keyboardType: TextInputType.number,
           ),
           const SizedBox(
             height: 20,
@@ -80,8 +69,8 @@ class MeseInsert extends StatelessWidget {
           RaisedButton(
             child: Text("Guardar"),
             onPressed: () {
-              setMeseros(_nomb.text, _apell1.text, _apell2.text);
-              getMeseros();
+              setPlatillos(_nombre.text, _importe.text);
+              getPlatillos();
             },
           ),
         ],
@@ -90,23 +79,22 @@ class MeseInsert extends StatelessWidget {
   }
 }
 
-class MeseList extends StatelessWidget {
-  final TextEditingController _idMese = TextEditingController();
-  int tamanio = listMes.length;
+class PlatList extends StatelessWidget {
+  final TextEditingController _idPlati = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Mesero'),
+        title: const Text('Platillo'),
       ),
       body: ListView(
         //crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           TextField(
-            controller: _idMese,
+            controller: _idPlati,
             decoration: const InputDecoration(
-                labelText: "ID Mesero",
+                labelText: "ID Platillo",
                 labelStyle: TextStyle(fontSize: 15, color: Colors.black)),
             keyboardType: TextInputType.text,
           ),
@@ -116,50 +104,46 @@ class MeseList extends StatelessWidget {
           RaisedButton(
             child: const Text("Eliminar"),
             onPressed: () {
-              delMeseros(_idMese.text);
-              getMeseros();
+              delPlatillos(_idPlati.text);
+              getPlatillos();
             },
           ),
           const SizedBox(
             height: 20,
           ),
-          for (var i = 0; i < listMes.length; i++)
+          for (var i = 0; i < listPlat.length; i++)
             Card(
               child: ListTile(
                 title: Text(
-                  listMes[i],
+                  listPlat[i],
                   style: const TextStyle(color: Colors.white),
                 ),
               ),
               color: Colors.green,
             ),
         ],
-        //child: ListTile(
-        //title: Text(listC[1]),
-        //
       ),
     );
   }
 }
 
-class MeseActu extends StatelessWidget {
-  MeseActu({Key? key}) : super(key: key);
-  final TextEditingController _idMes = TextEditingController();
-  final TextEditingController _nomb = TextEditingController();
-  final TextEditingController _apell1 = TextEditingController();
-  final TextEditingController _apell2 = TextEditingController();
+class PlatiActu extends StatelessWidget {
+  PlatiActu({Key? key}) : super(key: key);
+  final TextEditingController _idPlat = TextEditingController();
+  final TextEditingController _nombre = TextEditingController();
+  final TextEditingController _importe = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Mesero'),
+        title: const Text('Platillo'),
       ),
       body: ListView(
         children: [
           TextField(
-            controller: _idMes,
+            controller: _idPlat,
             decoration: const InputDecoration(
-                labelText: "ID mesero",
+                labelText: "ID Platillo",
                 labelStyle: TextStyle(fontSize: 15, color: Colors.black)),
             keyboardType: TextInputType.text,
           ),
@@ -167,7 +151,7 @@ class MeseActu extends StatelessWidget {
             height: 10,
           ),
           TextField(
-            controller: _nomb,
+            controller: _nombre,
             decoration: const InputDecoration(
                 labelText: "Nombre",
                 labelStyle: TextStyle(fontSize: 15, color: Colors.black)),
@@ -177,21 +161,11 @@ class MeseActu extends StatelessWidget {
             height: 10,
           ),
           TextField(
-            controller: _apell1,
+            controller: _importe,
             decoration: const InputDecoration(
-                labelText: "Primer apellido",
+                labelText: "Importe",
                 labelStyle: TextStyle(fontSize: 15, color: Colors.black)),
-            keyboardType: TextInputType.text,
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          TextField(
-            controller: _apell2,
-            decoration: const InputDecoration(
-                labelText: "Segundo apellido",
-                labelStyle: TextStyle(fontSize: 15, color: Colors.black)),
-            keyboardType: TextInputType.text,
+            keyboardType: TextInputType.number,
           ),
           const SizedBox(
             height: 20,
@@ -199,17 +173,17 @@ class MeseActu extends StatelessWidget {
           RaisedButton(
             child: Text("Actualizar"),
             onPressed: () {
-              updtMesero(_idMes.text, _nomb.text, _apell1.text, _apell2.text);
+              updtPlatillos(_idPlat.text, _nombre.text, _importe.text);
             },
           ),
           const SizedBox(
             height: 20,
           ),
-          for (var i = 0; i < listMes.length; i++)
+          for (var i = 0; i < listPlat.length; i++)
             Card(
               child: ListTile(
                 title: Text(
-                  listMes[i],
+                  listPlat[i],
                   style: const TextStyle(color: Colors.white),
                 ),
               ),
@@ -229,8 +203,8 @@ Widget btnInsert(contexto) {
       //padding: EdgeInsets.symmetric(horizontal: 75, vertical: 10),
       onPressed: () {
         Navigator.of(contexto)
-            .push(MaterialPageRoute(builder: (context) => MeseInsert()));
-        getMeseros();
+            .push(MaterialPageRoute(builder: (context) => PlatInsert()));
+        getPlatillos();
       },
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: const Text(
@@ -247,8 +221,8 @@ Widget btnListar(contexto) {
       //padding: EdgeInsets.symmetric(horizontal: 75, vertical: 10),
       onPressed: () {
         Navigator.of(contexto)
-            .push(MaterialPageRoute(builder: (context) => MeseList()));
-        getMeseros();
+            .push(MaterialPageRoute(builder: (context) => PlatList()));
+        getPlatillos();
       },
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: const Text(
@@ -264,8 +238,8 @@ Widget btnActualizar(contexto) {
       color: Colors.greenAccent,
       onPressed: () {
         Navigator.of(contexto)
-            .push(MaterialPageRoute(builder: (context) => MeseActu()));
-        getMeseros();
+            .push(MaterialPageRoute(builder: (context) => PlatiActu()));
+        getPlatillos();
       },
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: const Text(

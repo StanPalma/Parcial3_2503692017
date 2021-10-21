@@ -4,6 +4,7 @@ import 'package:parcial3/BD/bdmesas.dart';
 import 'package:parcial3/BD/bdmeseros.dart';
 import 'package:parcial3/BD/controller.dart';
 import 'package:parcial3/Principal/mesas.dart';
+import 'package:parcial3/Principal/platillos.dart';
 import 'Principal/meseros.dart';
 import 'Principal/principal.dart';
 
@@ -60,7 +61,7 @@ class Inicio extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          //btnPlatillo(context),
+          btnPlatillo(context),
           const SizedBox(
             height: 10,
           ),
@@ -122,7 +123,6 @@ Widget btnMesa(contexto) {
         style: TextStyle(fontSize: 20, color: Colors.white),
       ));
 }
-/*
 
 Widget btnPlatillo(contexto) {
   return MaterialButton(
@@ -132,7 +132,7 @@ Widget btnPlatillo(contexto) {
       //padding: EdgeInsets.symmetric(horizontal: 75, vertical: 10),
       onPressed: () {
         Navigator.of(contexto)
-            .push(MaterialPageRoute(builder: (context) => Platillo()));
+            .push(MaterialPageRoute(builder: (context) => PlatOpc()));
       },
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: Text(
@@ -141,6 +141,7 @@ Widget btnPlatillo(contexto) {
       ));
 }
 
+/*
 Widget btnBebida(contexto) {
   return MaterialButton(
       height: 40.0,
